@@ -1,30 +1,28 @@
 # Autogen Task Manager
 
-Autogen Task Manager is a simple Node.js application that integrates **TypeORM** with **PostgreSQL** for task management and utilizes **OpenAI's GPT-4** to classify tasks by priority.
+Autogen Task Manager is a **NestJS** application that integrates **TypeORM** with **PostgreSQL** for task management and utilizes **OpenAI's GPT-4** to classify tasks by priority.
 
 ## Features
 
 - REST API for task creation.
 - Database integration using **PostgreSQL** and **TypeORM**.
 - AI-powered task prioritization using **OpenAI GPT-4**.
-- Express.js-based server with CORS support.
+- Built with **NestJS** for modular and scalable development.
 
----
+## Installation & Setup
 
-## 🚀 Installation & Setup
-
-### **1. Clone the Repository**
+### 1. Clone the Repository
 ```sh
 git clone https://github.com/yourusername/autogen-task-manager.git
 cd autogen-task-manager
 ```
 
-### **2. Install dependencies**
+### 2. Install Dependencies
 ```sh
 npm install
 ```
 
-### **3. Create a .env File**
+### 3. Create a `.env` File
 ```
 DB_HOST=localhost
 DB_PORT=5432
@@ -35,58 +33,61 @@ OPENAI_API_KEY=your_openai_api_key
 PORT=3000
 ```
 
-### **4. Start PostgreSQL Database**
-Ensure you have PostgreSQL running and create the database specified in .env.
+### 4. Start PostgreSQL Database
+Ensure PostgreSQL is running and create the database specified in `.env`.
 
-### **5. Running the Application**
-Ensure you have PostgreSQL running and create the database specified in .env.
+### 5. Running the Application
 
-### Development Mode
+#### Development Mode
 ```sh
 npm run dev
 ```
 
-### Production Mode
-// TODO
+#### Production Mode
+```sh
+npm run build
+npm run start
+```
 
-### **6. API Endpoints**
+## API Endpoints
 
-#### Create a Task
+### Create a Task
 
-Endpoint
+**Endpoint**
 ```
 POST /tasks
 ```
 
-Request Body
-```
+**Request Body**
+```json
 {
   "title": "Submit project report before midnight",
   "deadline": "2025-01-19"
 }
 ```
 
-Expected response
-```
+**Expected Response**
+```json
 {
   "task": {
+    "id": 1,
     "title": "Submit project report before midnight",
     "deadline": "2025-01-19",
-    "completed": false,
-    "id": 1
+    "completed": false
   },
   "priority": "Urgent"
 }
 ```
 
-
 ## Technologies Used
 
-- Node.js with Express.js (Server)
-- TypeORM with PostgreSQL (Database)
-- OpenAI API (Task Prioritization)
+- **NestJS** (Server)
+- **TypeORM** with **PostgreSQL** (Database)
+- **OpenAI API** (Task Prioritization)
 
 ## Author
-Arbrim Rashiti
-Email: arbrimrashiti@gmail.com
-LinkedIn: linkedin.com/in/arbrimrashiti
+
+Arbrim Rashiti  
+Email: arbrimrashiti@gmail.com  
+LinkedIn: [linkedin.com/in/arbrimrashiti](https://linkedin.com/in/arbrimrashiti)
+

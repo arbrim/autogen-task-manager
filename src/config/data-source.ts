@@ -1,12 +1,11 @@
-import "reflect-metadata";
-import { DataSource } from "typeorm";
-import { Task } from "../models/Task";
-import * as dotenv from "dotenv";
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { Task } from '../tasks/task.entity';
+import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-export const AppDataSource = new DataSource({
-  type: "postgres",
+export const typeOrmConfig: TypeOrmModuleOptions = {
+  type: 'postgres',
   host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT),
   username: process.env.DB_USERNAME,
@@ -15,4 +14,4 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   logging: true,
   entities: [Task],
-});
+};
