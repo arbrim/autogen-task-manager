@@ -1,33 +1,19 @@
 {
+  "name": "autogen-task-manager",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "dev": "TS_NODE_PROJECT=tsconfig.json ts-node -r tsconfig-paths/register src/main.ts",
-    "build": "tsc && nest build",
-    "start": "node dist/main.js",
-    "start:dev": "nest start --watch",
-    "start:prod": "node dist/main.js",
-    "clean": "rm -rf dist",
-    "prebuild": "npm run clean"
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "start": "npm run start:backend & npm run start:frontend",
+    "start:backend": "npm --prefix backend run dev",
+    "start:frontend": "npm --prefix frontend run dev",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "npm --prefix backend run build",
+    "build:frontend": "npm --prefix frontend run build",
+    "clean": "npm run clean:backend && npm run clean:frontend",
+    "clean:backend": "rm -rf backend/node_modules backend/dist",
+    "clean:frontend": "rm -rf frontend/node_modules frontend/.next"
   },
-  "dependencies": {
-    "@nestjs/common": "^11.0.1",
-    "@nestjs/core": "^11.0.1",
-    "@nestjs/platform-express": "^11.0.1",
-    "@nestjs/typeorm": "^11.0.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "openai": "^4.79.1",
-    "pg": "^8.13.1",
-    "reflect-metadata": "^0.2.2",
-    "typeorm": "^0.3.20"
-  },
-  "devDependencies": {
-    "@nestjs/cli": "^10.4.9",
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.10.7",
-    "ts-node": "^10.9.2",
-    "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.7.3"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }

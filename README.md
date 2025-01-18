@@ -1,93 +1,81 @@
 # Autogen Task Manager
 
-Autogen Task Manager is a **NestJS** application that integrates **TypeORM** with **PostgreSQL** for task management and utilizes **OpenAI's GPT-4** to classify tasks by priority.
+Autogen Task Manager is a **full-stack task management system** built with:
+- **NestJS + TypeORM + PostgreSQL** for the **backend**.
+- **Next.js + Chakra UI** for the **frontend**.
+- **OpenAI's GPT-4** for **AI-powered task prioritization**.
 
-## Features
+## 🚀 Features
+- **Task Management**: Create, view, and update tasks with deadlines.
+- **AI Task Prioritization**: Uses GPT-4 to classify tasks by priority.
+- **Database Integration**: PostgreSQL with TypeORM.
+- **Full-Stack Application**: Next.js frontend + NestJS backend.
 
-- REST API for task creation.
-- Database integration using **PostgreSQL** and **TypeORM**.
-- AI-powered task prioritization using **OpenAI GPT-4**.
-- Built with **NestJS** for modular and scalable development.
+---
 
-## Installation & Setup
+# 🔧 Setup Guide
 
-### 1. Clone the Repository
+## 1️⃣ Clone the Repository
 ```sh
 git clone https://github.com/yourusername/autogen-task-manager.git
 cd autogen-task-manager
 ```
 
-### 2. Install Dependencies
+## 2️⃣ Install Dependencies
+
+### Backend
 ```sh
+cd backend
 npm install
 ```
 
-### 3. Create a `.env` File
+### Frontend
+```sh
+cd ../frontend
+npm install
+```
+
+---
+
+## 3️⃣ Backend Configuration
+
+### Create a `.env` File in `backend/`
 ```
 DB_HOST=localhost
 DB_PORT=5432
 DB_USERNAME=your_db_user
 DB_PASSWORD=your_db_password
-DB_NAME=your_database
+DB_NAME=taskmanager
 OPENAI_API_KEY=your_openai_api_key
 PORT=3000
 ```
+Ensure PostgreSQL is running and the database is created.
 
-### 4. Start PostgreSQL Database
-Ensure PostgreSQL is running and create the database specified in `.env`.
-
-### 5. Running the Application
-
-#### Development Mode
+### Start Backend Server
 ```sh
+cd backend
 npm run dev
 ```
+Backend will be running at **`http://localhost:3000`**.
 
-#### Production Mode
+---
+
+## 4️⃣ Frontend Configuration
+
+### Start Frontend Server
 ```sh
-npm run build
-npm run start
+cd frontend
+npm run dev
 ```
+Frontend will be available at **`http://localhost:3001`**.
 
-## API Endpoints
+> **Note:** The frontend will communicate with the backend API at **`http://localhost:3000`**.
 
-### Create a Task
+---
 
-**Endpoint**
-```
-POST /tasks
-```
-
-**Request Body**
-```json
-{
-  "title": "Submit project report before midnight",
-  "deadline": "2025-01-19"
-}
-```
-
-**Expected Response**
-```json
-{
-  "task": {
-    "id": 1,
-    "title": "Submit project report before midnight",
-    "deadline": "2025-01-19",
-    "completed": false
-  },
-  "priority": "Urgent"
-}
-```
-
-## Technologies Used
-
-- **NestJS** (Server)
-- **TypeORM** with **PostgreSQL** (Database)
-- **OpenAI API** (Task Prioritization)
-
-## Author
-
+## 👤 Author
 Arbrim Rashiti  
-Email: arbrimrashiti@gmail.com  
-LinkedIn: [linkedin.com/in/arbrimrashiti](https://linkedin.com/in/arbrimrashiti)
+📧 Email: [arbrimrashiti@gmail.com](mailto:arbrimrashiti@gmail.com)  
+🔗 LinkedIn: [linkedin.com/in/arbrimrashiti](https://linkedin.com/in/arbrimrashiti)
 
+---
