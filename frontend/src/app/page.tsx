@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Box, Button, Heading, Input, VStack, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Input, VStack, Text, Flex } from "@chakra-ui/react";
 
 type Task = {
   id: number;
@@ -50,6 +50,24 @@ export default function Home() {
     setIsThinking(false);
   };
 
+  const handleCreateTaskLocalOllama = async () => {
+    setIsThinking(true);
+    const response = await fetch("http://localhost:3000/tasks/local-ollama", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, deadline }),
+    });
+
+    const newTask = await response.json();
+    console.log("New task:", newTask);
+    if (newTask) {
+      setTasks([...tasks, newTask]);
+    }
+    setTitle("");
+    setDeadline("");
+    setIsThinking(false);
+  };
+
   return (
     <VStack spacing={4} p={8}>
       <Heading>Task Manager</Heading>
@@ -66,9 +84,14 @@ export default function Home() {
           onChange={(e) => setDeadline(e.target.value)}
           mb={2}
         />
-        <Button onClick={handleCreateTask} colorScheme="blue" disabled={isThinking}>
-          Add Task
-        </Button>
+        <Flex>
+          <Button onClick={handleCreateTask} colorScheme="blue" disabled={isThinking}>
+            Add Task
+          </Button>
+          <Button onClick={handleCreateTaskLocalOllama} colorScheme="blue" disabled={isThinking} ml-2>
+            Add Task Local Ollama
+          </Button>
+        </Flex>
         <Text hidden={!isThinking}>Thinking...</Text>
       </Box>
 

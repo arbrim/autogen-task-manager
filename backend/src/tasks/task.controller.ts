@@ -9,4 +9,9 @@ export class TaskController {
   async createTask(@Body() body: { title: string; deadline: string }) {
     return this.taskService.createTask(body.title, body.deadline);
   }
+
+  @Post('local-ollama')
+  async createTaskLocalOllama(@Body() body: { title: string; deadline: string }) {
+    return this.taskService.createTaskUsingLocalOllama(body.title, body.deadline);
+  }
 }

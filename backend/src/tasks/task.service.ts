@@ -19,4 +19,13 @@ export class TaskService {
 
     return task;
   }
+
+  async createTaskUsingLocalOllama(title: string, deadline: string) {
+    const priority = await this.aiService.prioritizeTaskUsingLocalOllama(title);
+
+    const task = this.taskRepository.create({ title, deadline, completed: false, priority });
+    await this.taskRepository.save(task);
+
+    return task;
+  }
 }

@@ -10,6 +10,36 @@ const openai = new OpenAI({
 
 @Injectable()
 export class AiService {
+  private readonly ollamaBaseUrl = 'http://localhost:11434'; // Default Ollama API endpoint
+  private readonly model = 'llama3:8b'; // Change to the model you want
+
+  async prioritizeTaskUsingLocalOllama(taskDescription: string): Promise<string> {
+    try {
+      const response = await fetch(`${this.ollamaBaseUrl}/api/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: this.model,
+          prompt: `Analyze this task: "${taskDescription}" and classify it as one of the following: "Urgent", "High", "Medium", or "Low". Only return the classification.`,
+          stream: false,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data?.response) {
+        return data.response.trim();
+      }
+
+      console.warn("Ollama response is empty or invalid:", data);
+      return "Unable to determine priority.";
+
+    } catch (error) {
+      console.error("Ollama API Error:", error);
+      return "Error determining priority.";
+    }
+  }
+  
   async prioritizeTask(taskDescription: string): Promise<string> {
     try {
       const response = await openai.chat.completions.create({
