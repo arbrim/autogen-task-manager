@@ -1,5 +1,7 @@
 # Autogen Task Manager
 
+## Just hanging around with AI
+
 Autogen Task Manager is a **full-stack task management system** built with:
 - **NestJS + TypeORM + PostgreSQL** for the **backend**.
 - **Next.js + Chakra UI** for the **frontend**.
