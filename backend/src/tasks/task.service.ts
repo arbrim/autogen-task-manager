@@ -14,9 +14,9 @@ export class TaskService {
   async createTask(title: string, deadline: string) {
     const priority = await this.aiService.prioritizeTask(title);
 
-    const task = this.taskRepository.create({ title, deadline, completed: false });
+    const task = this.taskRepository.create({ title, deadline, completed: false, priority });
     await this.taskRepository.save(task);
 
-    return { task, priority };
+    return task;
   }
 }

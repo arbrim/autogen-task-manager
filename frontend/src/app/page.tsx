@@ -8,12 +8,15 @@ type Task = {
   title: string;
   deadline: string;
   completed: boolean;
+  priority: string;
 };
 
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]); // Initialize as an empty array
   const [title, setTitle] = useState<string>("");
   const [deadline, setDeadline] = useState<string>("");
+
+  const [isThinking, setIsThinking] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3000/tasks")
@@ -30,6 +33,7 @@ export default function Home() {
   }, []);
 
   const handleCreateTask = async () => {
+    setIsThinking(true);
     const response = await fetch("http://localhost:3000/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -37,11 +41,13 @@ export default function Home() {
     });
 
     const newTask = await response.json();
-    if (newTask && newTask.task) {
-      setTasks([...tasks, newTask.task]);
+    console.log("New task:", newTask);
+    if (newTask) {
+      setTasks([...tasks, newTask]);
     }
     setTitle("");
     setDeadline("");
+    setIsThinking(false);
   };
 
   return (
@@ -60,9 +66,10 @@ export default function Home() {
           onChange={(e) => setDeadline(e.target.value)}
           mb={2}
         />
-        <Button onClick={handleCreateTask} colorScheme="blue">
+        <Button onClick={handleCreateTask} colorScheme="blue" disabled={isThinking}>
           Add Task
         </Button>
+        <Text hidden={!isThinking}>Thinking...</Text>
       </Box>
 
       <VStack align="stretch">
@@ -70,7 +77,7 @@ export default function Home() {
           tasks.map((task) => (
             <Box key={task.id} p={4} borderWidth="1px">
               <Text>
-                <strong>{task.title}</strong> - Due: {task.deadline} -{" "}
+                <strong>{task.title}</strong> - Due: {task.deadline} - Priority: {task.priority} -{" "}
                 <i>{task.completed ? "Completed" : "Pending"}</i>
               </Text>
             </Box>

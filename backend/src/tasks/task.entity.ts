@@ -8,6 +8,9 @@ export class Task extends BaseEntity {
   @Column()
   title: string;
 
+  @Column({ nullable: true })
+  priority?: string;
+
   @Column()
   deadline: string;
 
